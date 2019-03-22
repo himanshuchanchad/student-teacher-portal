@@ -1,3 +1,18 @@
 {% extends "index.html" %}
 {% block body %}
+<div class="class1">
+     <div class="card bd-secondary text-left text-black card-form " >
+       <div class="card-body">
+         <div class="form-group">
+           <form  method="post">
+
+             {% csrf_token %}
+             {{user.as_p}}
+             {{teacher.as_p}}
+             <button type="submit" name="button" class="btn btn-outline-primary">REGISTER</button>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
 {% endblock %}

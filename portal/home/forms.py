@@ -1,9 +1,10 @@
 from django import forms
-from .models import groupmember,group
-from teachers.models import teacher,assignment,practical,notes
-from student.models import student_assignment,student_practical,student
+from .models import group,students,teacher
+from teachers.models import assignment,practical,notes
+from student.models import student_assignment,student_practical
 from django.contrib.auth.models import User
 class add_user(forms.ModelForm):
+    password= forms.CharField(widget=forms.PasswordInput)
     password2=forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model=User
@@ -16,7 +17,7 @@ class add_user(forms.ModelForm):
             raise forms.ValidationError("password doesnt match !")
 class add_student(forms.ModelForm):
     class Meta:
-        model=student
+        model=students
         fields="__all__"
         exclude=['user']
 
@@ -55,3 +56,9 @@ class add_student_practical(forms.ModelForm):
         model=student_practical
         fields = "__all__"
         exclude = ['student','practical']
+
+class create_groups(forms.ModelForm):
+    class Meta:
+        model=group
+        fields='__all__'
+        exclude=['member']

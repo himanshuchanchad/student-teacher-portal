@@ -1,31 +1,35 @@
 from django.shortcuts import render
 from home import forms
 from . import models
-
 from django.contrib.auth.models import User
-from django.contrib.auth import logout,login,authenticate
 
+from django.contrib.auth import logout,login,authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from django.http import  HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 # Create your views here.
+from home.models import students
+
 def studentsignup(request):
     if request.method=="POST":
         user=forms.add_user(data=request.POST)
         student=forms.add_student(data=request.POST)
 
-        if user.is_valid and student.is_valid :
+        if user.is_valid() and student.is_valid() :
             create_user=user.save()
             create_user.set_password(create_user.password)
             create_user.save()
-            models.student.create(
-                user=user,
-                sapid=sapid,
-                year =year,
-                div =div,
-                batch=batch,
-                dept=dept
+            student_create=students.objects.create(
+                user=create_user,
+                sapid=student.cleaned_data['sapid'],
+                year =student.cleaned_data['year'],
+                div =student.cleaned_data['div'],
+                batch=student.cleaned_data['batch'],
+                dept=student.cleaned_data['dept']
                 )
+            student_create.save()
             return HttpResponseRedirect(reverse(student_login))
         else :
             pass
@@ -38,7 +42,16 @@ def studentsignup(request):
     }
     return render(request,"student_signup.html",context)
 
+@login_required
+def student_home(request):
+
+    return render(request, "student_home.html", context)
+
 def student_login(request):
+    storage = messages.get_messages(request)
+    context = {
+        'messages': storage,
+    }
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -49,8 +62,13 @@ def student_login(request):
                 login(request,user)
                 return HttpResponseRedirect(reverse(student_home))
             else:
-                return HttpResponse("user doesn't exists or password doesn't match!")
+                messages.warning(request, "Invalid login credentials")
+                return render(request, "teacher_login.html", context)
         else:
-            return HttpResponse("Enter the password !")
+            messages.warning(request, "Enter username and password ")
+            return render(request, "teacher_login.html", context)
     else:
-        return render(request,"student_login.html")
+        return render(request,"student_login.html",context)
+
+
+

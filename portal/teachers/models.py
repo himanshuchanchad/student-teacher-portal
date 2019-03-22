@@ -1,12 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from home.models import group,groupmember
+from home.models import group,teacher
 # Create your models here.
-class teacher(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    dept=models.CharField(max_length=50)
-    def __str__(self):
-        return self.user.username
+
 
 class assignment(models.Model):
     teacher=models.ForeignKey(teacher,on_delete=models.CASCADE)
