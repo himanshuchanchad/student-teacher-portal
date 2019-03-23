@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.http import  HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 # Create your views here.
-from home.models import students
+from home.models import students,group
 
 def studentsignup(request):
     if request.method=="POST":
@@ -30,7 +30,7 @@ def studentsignup(request):
                 dept=student.cleaned_data['dept']
                 )
             student_create.save()
-            return HttpResponseRedirect(reverse(student_login))
+            return HttpResponseRedirect(reverse('student:login'))
         else :
             pass
     else :
@@ -44,6 +44,11 @@ def studentsignup(request):
 
 @login_required
 def student_home(request):
+    student_current = students.objects.filter(user=request.user).first()
+    group_list = group.objects.filter(member=student_current)
+    context = {
+        'group_list': group_list
+    }
 
     return render(request, "student_home.html", context)
 
@@ -60,7 +65,7 @@ def student_login(request):
             user=authenticate(username=username,password=password)
             if user:
                 login(request,user)
-                return HttpResponseRedirect(reverse(student_home))
+                return HttpResponseRedirect(reverse('student:student_home'))
             else:
                 messages.warning(request, "Invalid login credentials")
                 return render(request, "teacher_login.html", context)

@@ -2,7 +2,7 @@
 {% block body %}
 <form method="post">
   {% csrf_token %}
-  {{group}}
-  <button type="submit" name="button" class="btn btn-success">Create</button>
+  {{group.as_p}}
+  <button type="submit" name="button" class="btn btn-outline-success">Create</button>
 </form>
 {% endblock %}

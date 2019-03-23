@@ -1,0 +1,82 @@
+{% extends "teacher_home.html" %}
+{% block body %}
+
+<a href="{% url 'teacher:addassignment' pk=group.pk %}" class="btn btn-outline-info" >Add assignment</a>
+<a href="{% url 'teacher:addpractical' pk=group.pk %}" class="btn btn-outline-info">Add practical</a>
+<a href="{% url 'teacher:addnotes' pk=group.pk %}" class="btn btn-outline-info">Add notes</a>
+{% if assignment %}
+<h1>Assignment</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for group in assignment %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{group.title}}</td>
+      <td>{{group.created}}</td>
+      <td>{{group.deadline}}</td>
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% if practical %}
+<h1>Practical</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for group in practical %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{group.title}}</td>
+      <td>{{group.created}}</td>
+      <td>{{group.deadline}}</td>
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% if notes %}
+<h1>Notes</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for group in notes %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{group.title}}</td>
+      <td>{{group.created}}</td>
+      <td>{{group.deadline}}</td>
+
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% endblock %}

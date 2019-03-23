@@ -1,0 +1,9 @@
+{% extends "teacher_home.html" %}
+{% block body %}
+<form  method="post">
+{% csrf_token %}
+{{assignment.as_p}}
+<button type="submit" name="button" class="btn btn-danger">Add assignment</button>
+</form>
+
+{% endblock %}

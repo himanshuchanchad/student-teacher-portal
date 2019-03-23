@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 from home import views
 urlpatterns = [
+    path('',views.index,name='index'),
     path('admin/', admin.site.urls),
     path('create/',views.create_group,name="create_group"),
     path('teacher/',include(('teachers.urls',' teacher'),namespace='teacher')),
     path('student/',include(('student.urls','student'),namespace='student')),
+    path('logout/',views.logoutrequest,name='request_logout'),
+    path('teacher_group_detail/<int:pk>/',views.teacher_group_detail,name="teacher_group_detail"),
+    path('student_group_detail/<int:pk>/',views.student_group_detail,name="student_group_detail"),
 ]

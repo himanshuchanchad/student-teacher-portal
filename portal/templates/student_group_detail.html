@@ -1,0 +1,80 @@
+{% extends "student_home.html" %}
+{% block body %}
+
+
+{% if assignment %}
+<h1>Assignment</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for temp in assignment %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% if practical %}
+<h1>Practical</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for temp in practical %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% if notes %}
+<h1>Notes</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">created</th>
+      <th scope="col">deadline</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for temp in notes %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
+
+    </tr>
+    {%endfor %}
+  </tbody>
+
+</table>
+{% endif %}
+{% endblock %}
