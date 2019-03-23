@@ -10,8 +10,9 @@ from django.contrib import messages
 from django.http import  HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 # Create your views here.
+from teachers.models import assignment,practical
 from home.models import students,group
-
+from .models import student_assignment,student_practical
 def studentsignup(request):
     if request.method=="POST":
         user=forms.add_user(data=request.POST)
@@ -76,4 +77,52 @@ def student_login(request):
         return render(request,"student_login.html",context)
 
 
+@login_required
+def submitassignment(request,pk,assignpk):
+    student = students.objects.filter(user=request.user).first()
+    groups=group.objects.filter(pk=pk).first()
+    assign=assignment.objects.filter(pk=assignpk).first()
+    if request.method=='POST':
+        submitassignment_form=forms.add_student_assignment(data=request.POST)
+        # if submitassignment_form.is_valid():
+        if 'file' in request.FILES:
+            assignment_save = student_assignment.objects.create(
+                    student=student,
+                    group=groups,
+                    assignment=assign,
+                    file=request.FILES['file'],
+                )
+            assignment_save.save()
+            return HttpResponseRedirect(reverse('student_group_detail', kwargs={'pk': groups.pk}))
+    else:
+        submitassignment_form=forms.add_student_assignment()
+    context={
+    'assignment':submitassignment_form
+    }
+    return render(request,"submit_assignment.html",context)
 
+@login_required
+def submitpractical(request,pk,assignpk):
+    student=students.objects.filter(user=request.user)
+    groups=group.objects.filter(pk=pk).first()
+    assign = practical.objects.filter(pk=assignpk).first()
+    if request.method=='POST':
+        submitpractical_form=forms.add_student_practical(data=request.POST)
+        # if submitpractical_form.is_valid():
+        if 'file' in request.FILES:
+            practical_save = student_practical.objects.create(
+                    student=student,
+                    group=groups,
+                    practical=assign,
+                    file=request.FILES['file'],
+                )
+            practical_save.save()
+            return HttpResponseRedirect(reverse('student_group_detail', kwargs={'pk': groups.pk}))
+        # else:
+        #     print('error')
+    else:
+        submitpractical_form=forms.add_student_practical()
+    context={
+    'practical':submitpractical_form
+    }
+    return render(request,"submit_practical.html",context)

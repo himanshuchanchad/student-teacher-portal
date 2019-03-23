@@ -49,7 +49,7 @@ class add_student_assignment(forms.ModelForm):
     class Meta:
         model=student_assignment
         fields = "__all__"
-        exclude = ['student','assignment']
+        exclude = ['student','group','assignment']
 
 class add_student_practical(forms.ModelForm):
     class Meta:
@@ -61,4 +61,4 @@ class create_groups(forms.ModelForm):
     class Meta:
         model=group
         fields='__all__'
-        exclude=['owner', 'group','member']
+        exclude=['owner','member']

@@ -11,6 +11,7 @@
       <th scope="col">Title</th>
       <th scope="col">created</th>
       <th scope="col">deadline</th>
+      <th scope="col"> status</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
       <td>{{temp.title}}</td>
       <td>{{temp.created}}</td>
       <td>{{temp.deadline}}</td>
+      <td><a href="{% url 'student:submitassignment' pk=group.pk assignpk=temp.pk  %}" class="btn btn-outline-info" >Submit assignment</a></td>
     </tr>
     {%endfor %}
   </tbody>
@@ -35,7 +37,7 @@
       <th scope="col">Title</th>
       <th scope="col">created</th>
       <th scope="col">deadline</th>
-
+      <th scope="col">status</th>
     </tr>
   </thead>
   <tbody>
@@ -45,6 +47,7 @@
       <td>{{temp.title}}</td>
       <td>{{temp.created}}</td>
       <td>{{temp.deadline}}</td>
+        <td><a href="{% url 'student:submitpractical' pk=group.pk assignpk=temp.pk  %}" class="btn btn-outline-info" >Submit practical</a></td>
     </tr>
     {%endfor %}
   </tbody>

@@ -16,12 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    {%for group in assignment %}
+    {%for temp in assignment %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{group.title}}</td>
-      <td>{{group.created}}</td>
-      <td>{{group.deadline}}</td>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
     </tr>
     {%endfor %}
   </tbody>
@@ -41,12 +41,12 @@
     </tr>
   </thead>
   <tbody>
-    {%for group in practical %}
+    {%for temp in practical %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{group.title}}</td>
-      <td>{{group.created}}</td>
-      <td>{{group.deadline}}</td>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
     </tr>
     {%endfor %}
   </tbody>
@@ -66,12 +66,12 @@
     </tr>
   </thead>
   <tbody>
-    {%for group in notes %}
+    {%for temp in notes %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{group.title}}</td>
-      <td>{{group.created}}</td>
-      <td>{{group.deadline}}</td>
+      <td>{{temp.title}}</td>
+      <td>{{temp.created}}</td>
+      <td>{{temp.deadline}}</td>
 
     </tr>
     {%endfor %}

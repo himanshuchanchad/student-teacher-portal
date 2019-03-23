@@ -96,3 +96,4 @@ def student_group_detail(request,pk):
         'notes':note,
     }
     return render(request,"student_group_detail.html",context)
+
