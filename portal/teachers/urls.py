@@ -8,5 +8,7 @@ urlpatterns = [
     path('addassignment/<int:pk>/',views.addassignment,name='addassignment'),
     path('addpractical/<int:pk>/',views.addpractical,name='addpractical'),
     path('addnotes/<int:pk>/',views.addnotes,name='addnotes'),
+    path('viewassignment/<int:assignpk>/',views.viewassignment,name='viewassignment'),
+    path('viewpractical/<int:assignpk>/', views.viewpractical, name='viewpractical'),
 
 ]

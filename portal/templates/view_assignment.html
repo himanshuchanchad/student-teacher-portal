@@ -1,0 +1,28 @@
+{% extends "teacher_home.html" %}
+{% block body %}
+{% if assignment_list %}
+<h1>Assignment</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">student</th>
+      <th scope="col">sapid</th>
+      <th scope="col">submission date</th>
+      <th scope='col'>View file</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for assignment in assignment_list %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{assignment.student.user}}</td>
+      <td>{{assignment.student.sapid}}</td>
+      <td>{{assignment.submission}}</td>
+      <td>FILE </td>
+    </tr>
+    {%endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

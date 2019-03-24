@@ -10,6 +10,7 @@ from django.http import  HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 from .models import assignment,practical,notes
 from home.models import teacher,group
+from student.models import student_assignment,student_practical
 # Create your views here.
 
 def teachersignup(request):
@@ -112,7 +113,7 @@ def addpractical(request,pk):
         addpractical_form=forms.add_practical(data=request.POST)
         if addpractical_form.is_valid():
             if 'file' in request.FILES:
-                practical_save = assignment.objects.create(
+                practical_save = practical.objects.create(
                     teacher=groups.owner,
                     group=groups,
                     deadline=addpractical_form.cleaned_data['deadline'],
@@ -122,7 +123,7 @@ def addpractical(request,pk):
                 )
                 practical_save.save()
             else:
-                assignment_save=assignment.objects.create(
+                practical_save=practical.objects.create(
                     teacher=groups.owner,
                     group=groups,
                     deadline=addpractical_form.cleaned_data['deadline'],
@@ -171,3 +172,25 @@ def addnotes(request,pk):
     'notes':addnotes_form
     }
     return render(request,"add_notes.html",context)
+
+@login_required
+def viewassignment(request,assignpk):
+    try :
+        assignment_list=student_assignment.objects.filter(assignment=assignpk)
+    except :
+        assignment_list=None
+    context={
+        'assignment_list':assignment_list
+    }
+    return render(request,"view_assignment.html",context)
+
+@login_required
+def viewpractical(request,assignpk):
+    try :
+        practical_list=student_practical.objects.filter(assignment=assignpk)
+    except :
+        practical_list=None
+    context={
+        'practical_list':practical_list
+    }
+    return render(request,"view_practical.html",context)

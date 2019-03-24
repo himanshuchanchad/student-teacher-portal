@@ -19,7 +19,7 @@
     {%for temp in assignment %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{temp.title}}</td>
+      <td> <a href="{% url 'teacher:viewassignment' assignpk=temp.pk %}">{{temp.title}}</a></td>
       <td>{{temp.created}}</td>
       <td>{{temp.deadline}}</td>
     </tr>
@@ -44,7 +44,7 @@
     {%for temp in practical %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{temp.title}}</td>
+      <td> <a href="{% url 'teacher:viewpractical' assignpk=temp.pk %}">{{temp.title}}</a></td>
       <td>{{temp.created}}</td>
       <td>{{temp.deadline}}</td>
     </tr>
