@@ -35,23 +35,23 @@ class group(models.Model):
     def __str__(self):
         return self.name
 
-def post_save_group(sender,instance,*args,**kwargs):
-    create_groupmember=instance
-    if instance.member is None:
-        if sender.div :
-            student=students.objects.filter(div=instance.div_or_batch)
-            for s in student :
-                create_groupmember.member.add(s)
-                create_groupmember.save()
-
-        elif sender.batch:
-            student = students.objects.filter(batch=instance.div_or_batch)
-            print(student)
-            for s in student:
-                create_groupmember.member.add(s)
-                create_groupmember.save()
-
-post_save.connect(post_save_group,sender=group)
+# def post_save_group(sender,instance,*args,**kwargs):
+#     create_groupmember=instance
+#     if instance.member is None:
+#         if sender.div :
+#             student=students.objects.filter(div=instance.div_or_batch)
+#             for s in student :
+#                 create_groupmember.member.add(s)
+#                 create_groupmember.save()
+#
+#         elif sender.batch:
+#             student = students.objects.filter(batch=instance.div_or_batch)
+#             print(student)
+#             for s in student:
+#                 create_groupmember.member.add(s)
+#                 create_groupmember.save()
+#
+# post_save.connect(post_save_group,sender=group)
 
 # class groupmember(models.Model):
 #     group=models.ForeignKey(group,on_delete=models.CASCADE)

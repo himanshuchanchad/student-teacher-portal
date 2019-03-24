@@ -3,6 +3,7 @@ from home import forms
 from . import models
 from django.contrib.auth.models import User
 
+from django.db.models import Q
 from django.contrib.auth import logout,login,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -46,8 +47,11 @@ def studentsignup(request):
 @login_required
 def student_home(request):
     student_current = students.objects.filter(user=request.user).first()
+    join_group = group.objects.filter(Q(div_or_batch=student_current.div) | Q(div_or_batch=student_current.batch) &
+                                      (Q(dept=student_current.dept) & Q(year=student_current.year))).exclude(member=student_current)
     group_list = group.objects.filter(member=student_current)
     context = {
+        'joingroup': join_group,
         'group_list': group_list
     }
 
@@ -126,3 +130,15 @@ def submitpractical(request,pk,assignpk):
     'practical':submitpractical_form
     }
     return render(request,"submit_practical.html",context)
+
+@login_required
+def joingroups(request,pk):
+    if request.method=="POST":
+        groups=group.objects.get(pk=pk)
+        student = students.objects.filter(user=request.user).first()
+        groups.member.add(student)
+        groups.save()
+        return HttpResponseRedirect(reverse('student:student_home'))
+    else:
+        pass
+    return render(request,"joingroups.html")
