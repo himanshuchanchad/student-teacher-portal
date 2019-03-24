@@ -18,7 +18,7 @@ def teachersignup(request):
         user=forms.add_user(data=request.POST)
         teacher_form=forms.add_teacher(data=request.POST)
 
-        if user.is_valid() and teacher.is_valid() :
+        if user.is_valid() and teacher_form.is_valid() :
             create_user=user.save()
             create_user.set_password(create_user.password)
             create_user.save()
@@ -32,10 +32,10 @@ def teachersignup(request):
             return HttpResponse("error")
     else :
         user = forms.add_user()
-        teacher = forms.add_teacher()
+        teacher_form = forms.add_teacher()
     context={
         'user':user,
-        'teacher':teacher,
+        'teacher_form':teacher_form,
     }
     return render(request,"student_signup.html",context)
 

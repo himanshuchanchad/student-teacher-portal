@@ -47,8 +47,7 @@ def studentsignup(request):
 @login_required
 def student_home(request):
     student_current = students.objects.filter(user=request.user).first()
-    join_group = group.objects.filter(Q(div_or_batch=student_current.div) | Q(div_or_batch=student_current.batch) &
-                                      (Q(dept=student_current.dept) & Q(year=student_current.year))).exclude(member=student_current)
+    join_group = group.objects.filter(Q(dept=student_current.dept) & Q(year=student_current.year)).exclude(member=student_current)
     group_list = group.objects.filter(member=student_current)
     context = {
         'joingroup': join_group,
@@ -73,10 +72,10 @@ def student_login(request):
                 return HttpResponseRedirect(reverse('student:student_home'))
             else:
                 messages.warning(request, "Invalid login credentials")
-                return render(request, "teacher_login.html", context)
+                return render(request, "student_login.html", context)
         else:
             messages.warning(request, "Enter username and password ")
-            return render(request, "teacher_login.html", context)
+            return render(request, "student_login.html", context)
     else:
         return render(request,"student_login.html",context)
 

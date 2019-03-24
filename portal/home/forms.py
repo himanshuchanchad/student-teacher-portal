@@ -3,6 +3,7 @@ from .models import group,students,teacher
 from teachers.models import assignment,practical,notes
 from student.models import student_assignment,student_practical
 from django.contrib.auth.models import User
+
 class add_user(forms.ModelForm):
     password= forms.CharField(widget=forms.PasswordInput)
     password2=forms.CharField(widget=forms.PasswordInput)
@@ -15,6 +16,7 @@ class add_user(forms.ModelForm):
         password2=all_cleaned_data['password2']
         if password!=password2 :
             raise forms.ValidationError("password doesnt match !")
+
 class add_student(forms.ModelForm):
     class Meta:
         model=students
@@ -24,8 +26,7 @@ class add_student(forms.ModelForm):
 class add_teacher(forms.ModelForm):
     class Meta:
         model=teacher
-        fields="__all__"
-        exclude=['user']
+        fields=['dept']
 
 class add_assignment(forms.ModelForm):
     class Meta:

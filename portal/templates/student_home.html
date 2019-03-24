@@ -12,13 +12,14 @@
     {% block body %}
 
 <h1>Student Portal</h1>
+{% if group_list%}
 <table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">subject</th>
-      <th scope="col">Div/batch</th>
+      <th scope="col">Div</th>
       <th scope='col'>year</th>
       <th scope="col">dept</th>
     </tr>
@@ -29,7 +30,7 @@
       <th scope="row">{{forloop.counter}}</th>
       <td><a href="{%url 'student_group_detail' pk=group.pk  %}">{{group.name}}</a></td>
       <td>{{group.sub}}</td>
-      <td>{{group.div_or_batch}}</td>
+      <td>{{group.div}}</td>
       <td>{{group.year}}</td>
       <td>{{group.dept}}</td>
     </tr>
@@ -37,6 +38,7 @@
   </tbody>
 
 </table>
+{% endif %}
 <h2>Join Group</h2>
 {% if joingroup %}
 {% for group in joingroup %}

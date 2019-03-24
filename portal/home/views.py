@@ -30,9 +30,10 @@ def create_group(request):
             owner=teacher_current,
             name =group_data.cleaned_data['name'],
             sub = group_data.cleaned_data['sub'],
-            div_or_batch = group_data.cleaned_data['div_or_batch'],
+            division = group_data.cleaned_data['division'],
             div = group_data.cleaned_data['div'],
             batch =group_data.cleaned_data['batch'],
+            batch_check=group_data.cleaned_data['batch_check'],
             year = group_data.cleaned_data['year'],
             dept = group_data.cleaned_data['dept'],
             )

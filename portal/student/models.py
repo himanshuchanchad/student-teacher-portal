@@ -10,7 +10,7 @@ class student_assignment(models.Model):
     group=models.ForeignKey(group,on_delete=models.CASCADE)
     assignment=models.ForeignKey(assignment,on_delete=models.CASCADE)
     submission=models.DateField(auto_now=True)
-    file = models.FileField(upload_to="assignment")
+    file = models.FileField(upload_to="assignment",blank=False,null=False)
 
     def __str__(self):
         return f"{self.student} {self.assignment.title}"
@@ -20,7 +20,7 @@ class student_practical(models.Model):
     group = models.ForeignKey(group, on_delete=models.CASCADE)
     practical=models.ForeignKey(practical,on_delete=models.CASCADE)
     submission=models.DateField(auto_now=True)
-    file = models.FileField(upload_to="practical")
+    file = models.FileField(upload_to="practical",blank=False,null=False)
 
     def __str__(self):
         return f"{self.student} {self.practical.title}"

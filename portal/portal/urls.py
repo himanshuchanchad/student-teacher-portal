@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from home import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('',views.index,name='index'),
     path('admin/', admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('logout/',views.logoutrequest,name='request_logout'),
     path('teacher_group_detail/<int:pk>/',views.teacher_group_detail,name="teacher_group_detail"),
     path('student_group_detail/<int:pk>/',views.student_group_detail,name="student_group_detail"),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
