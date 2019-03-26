@@ -27,4 +27,4 @@ urlpatterns = [
     path('logout/',views.logoutrequest,name='request_logout'),
     path('teacher_group_detail/<int:pk>/',views.teacher_group_detail,name="teacher_group_detail"),
     path('student_group_detail/<int:pk>/',views.student_group_detail,name="student_group_detail"),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

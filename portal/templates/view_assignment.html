@@ -19,7 +19,7 @@
       <td>{{assignment.student.user}}</td>
       <td>{{assignment.student.sapid}}</td>
       <td>{{assignment.submission}}</td>
-      <td>FILE </td>
+      <td> <a href="{% url 'teacher:teacher_view_all' pk=assignment.pk type='assignment' %}">FILE</a></td>
     </tr>
     {%endfor %}
   </tbody>

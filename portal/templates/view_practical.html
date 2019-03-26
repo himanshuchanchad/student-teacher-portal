@@ -19,7 +19,7 @@
       <td>{{practical.student.user}}</td>
       <td>{{practical.student.sapid}}</td>
       <td>{{practical.submission}}</td>
-      <td>FILE </td>
+      <td><a href="{% url 'teacher:teacher_view_all' pk=practical.pk type='practical' %}">FILE</a> </td>
     </tr>
     {%endfor %}
   </tbody>

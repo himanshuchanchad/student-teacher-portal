@@ -1,0 +1,17 @@
+{% extends "teacher_home.html" %}
+{% block body %}
+{% if notes_list %}
+<h1>Notes</h1>
+ {% for notes in notes_list %}
+ <div class="container">
+<div class="title">
+  {{notes.title}}
+</div>
+<div class="body">
+  {{notes.content}}
+</div>
+   <a href="{% url 'teacher:teacher_view_all' pk=notes.pk type='None' %}">View pdf </a>
+ </div>
+ {% endfor%}
+{% endif %}
+{% endblock %}

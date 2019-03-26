@@ -36,7 +36,6 @@ class notes(models.Model):
     title = models.CharField(max_length=50,blank=False)
     content = models.TextField(blank=True)
     file = models.FileField(upload_to="notes", blank=True, null=True)
-    deadline = models.DateField()
 
     def __str__(self):
         return self.title

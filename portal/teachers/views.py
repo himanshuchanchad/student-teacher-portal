@@ -118,7 +118,7 @@ def addpractical(request,pk):
                     group=groups,
                     deadline=addpractical_form.cleaned_data['deadline'],
                     title=addpractical_form.cleaned_data['title'],
-                    content=addpractical_formm.cleaned_data['content'],
+                    content=addpractical_form.cleaned_data['content'],
                     file=request.FILES['file']
                 )
                 practical_save.save()
@@ -187,10 +187,46 @@ def viewassignment(request,assignpk):
 @login_required
 def viewpractical(request,assignpk):
     try :
-        practical_list=student_practical.objects.filter(assignment=assignpk)
+        practical_list=student_practical.objects.filter(practical=assignpk)
     except :
         practical_list=None
     context={
         'practical_list':practical_list
     }
     return render(request,"view_practical.html",context)
+
+@login_required
+def viewnotes(request,assignpk):
+    try :
+        notes_list=notes.objects.filter(pk=assignpk)
+    except :
+        notes_list=None
+    context={
+        'notes_list':notes_list
+    }
+    return render(request,"view_notes.html",context)
+
+
+@login_required
+def teacher_view_all(request,type,pk):
+    if type=='assignment':
+        assignment_view=student_assignment.objects.get(pk=pk)
+        context={
+        'type':'Assignment',
+        'view':assignment_view
+             }
+        return render(request,"teacher_view_all.html",context)
+    elif type=='practical':
+        practical_view=practical.objects.get(pk=pk)
+        context = {
+            'type': 'Practical',
+            'view': practical_view
+        }
+        return render(request, "teacher_view_all.html", context)
+    else:
+        notes_view=notes.objects.get(pk=pk)
+        context = {
+            'type': 'Notes',
+            'view': notes_view
+        }
+        return render(request, "teacher_view_all.html", context)

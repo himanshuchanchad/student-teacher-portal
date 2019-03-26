@@ -10,5 +10,6 @@ urlpatterns = [
     path('addnotes/<int:pk>/',views.addnotes,name='addnotes'),
     path('viewassignment/<int:assignpk>/',views.viewassignment,name='viewassignment'),
     path('viewpractical/<int:assignpk>/', views.viewpractical, name='viewpractical'),
-
+    path('viewnotes/<int:assignpk>/', views.viewnotes, name='viewnotes'),
+    path('teacher_view_all/<int:pk>/<slug:type>/',views.teacher_view_all,name='teacher_view_all'),
 ]

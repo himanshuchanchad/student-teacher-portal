@@ -61,18 +61,14 @@
       <th scope="col">#</th>
       <th scope="col">Title</th>
       <th scope="col">created</th>
-      <th scope="col">deadline</th>
-
     </tr>
   </thead>
   <tbody>
     {%for temp in notes %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{temp.title}}</td>
+      <td> <a href="{% url 'teacher:viewnotes' assignpk=temp.pk %}">{{temp.title}}</a></td>
       <td>{{temp.created}}</td>
-      <td>{{temp.deadline}}</td>
-
     </tr>
     {%endfor %}
   </tbody>
