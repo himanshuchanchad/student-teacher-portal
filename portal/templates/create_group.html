@@ -1,8 +1,10 @@
-{% extends "index.html" %}
+{% extends "teacher_home.html" %}
 {% block body %}
-<form method="post">
-  {% csrf_token %}
-  {{group.as_p}}
-  <button type="submit" name="button" class="btn btn-outline-success">Create</button>
-</form>
+<div class="container">
+  <form method="post">
+    {% csrf_token %}
+    {{group.as_p}}
+    <button type="submit" name="button" class="btn btn-outline-success">Create</button>
+  </form>
+</div>
 {% endblock %}

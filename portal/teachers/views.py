@@ -37,7 +37,7 @@ def teachersignup(request):
         'user':user,
         'teacher_form':teacher_form,
     }
-    return render(request,"student_signup.html",context)
+    return render(request,"teacher_signup.html",context)
 
 
 

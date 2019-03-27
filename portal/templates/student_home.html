@@ -9,8 +9,32 @@
     <title></title>
   </head>
   <body>
-    {% block body %}
+    <nav class="navbar navbar-expand-sm mb-3 sticky-top navbar-dark bg-primary">
+              <div class="container">
+                  <a href="{% url 'student:student_home' %}" class="navbar-brand">Student</a>
+                  <button class="navbar-toggler" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false" aria-controls="navbar">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="defaultNavbar1">
+                        {% if user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto">
+                          <!-- <li class="nav-item"><a href="{%url 'create_group' %}" class="nav-link">Create group</a></li> -->
+                          <li class="nav-item"><a href="{%url 'request_logout' %}" class="nav-link"> Logout</a></li>
+                        </ul>
+                          {% else %}
+                          <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a href="{% url 'student:signup' %}" class="nav-link"> Sign Up</a></li>
+                            <li class="nav-item"><a href="{%url 'student:login' %}" class="nav-link" > Login</a></li>
+                          </ul>
+                          {% endif %}
+                      </ul>
+                  </div>
+              </div>
+          </nav>
 
+
+
+    {% block body %}
 <h1>Student Portal</h1>
 {% if group_list%}
 <table class="table table-bordered">
