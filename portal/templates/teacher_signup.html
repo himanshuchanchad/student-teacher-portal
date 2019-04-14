@@ -1,26 +1,24 @@
 {% extends "teacher_home.html" %}
-
-
+{% load static %}
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/teacher_css.css'%}">
 <div class="container">
   <div class="row">
-<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-     <div class="card bd-secondary text-left text-black card-form " >
-       <div class="card-body">
-           <h5 class="card-title text-center">Sign UP</h5>
-         <div class="form-group">
-           <form class="form-signin" method="post">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign Up</h5>
+          <form class="form-signin" method="post">
 
-             {% csrf_token %}
-             {{user.as_p}}
-             {{teacher_form.as_p}}
-             <br>
-             <button type="submit" name="button" class="btn btn-lg btn-danger btn-block text-uppercase" >REGISTER</button>
-           </form>
-         </div>
-       </div>
-     </div>
-   </div>
-</div>
+            {% csrf_token %}
+            {{user.as_p}}
+            {{teacher_form.as_p}}
+            <br>
+            <button type="submit" name="button" class="btn btn-lg btn-danger btn-block text-uppercase" >REGISTER</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

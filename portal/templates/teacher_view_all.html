@@ -1,6 +1,20 @@
 {% extends "teacher_home.html" %}
 {% block body %}
-<h1> {{type}}</h1>
-<a href="http://127.0.0.1:8000{{view.file.url}}" class="btn btn-primary" download>Download</a>
-<embed src="http://127.0.0.1:8000{{view.file.url}}" type="application/pdf"   height="700px" width="700px">
+<div class="container-fluid">
+  <h1 class="text-center"> {{type}}</h1>
+  <a href="http://127.0.0.1:8000{{view.file.url}}" class="btn btn-lg btn-success btn-block text-uppercase" download>Download</a>
+<br>
+<div class="container-fluid text-center">
+  {%  if 'pdf' in  view.file.url %}
+  <embed src="http://127.0.0.1:8000{{view.file.url}}" type="application/pdf"   height="700px" width="700px">
+{%  elif 'jpg'  in  view.file.url %}
+<img src="http://127.0.0.1:8000{{view.file.url}}" height="700px" width="700px">
+{% else %}
+<h2>Cannot preview file as it is not supported in Browser</h2>
+{% endif %}
+</div>
+
+</div>
+
+
 {% endblock %}
