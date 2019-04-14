@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout,login,authenticate
+from django.contrib.auth import login,authenticate
 from  django.contrib import  messages
 
 from home import forms
@@ -12,6 +11,7 @@ from .models import assignment,practical,notes
 from home.models import teacher,group
 from student.models import student_assignment,student_practical
 # Create your views here.
+from teachers.docxtopdf import converter
 
 def teachersignup(request):
     if request.method=="POST":
@@ -66,12 +66,17 @@ def teacher_login(request):
 
 @login_required
 def teacher_home(request):
-    teacher_current = teacher.objects.filter(user=request.user).first()
-    group_list=group.objects.filter(owner=teacher_current)
-    context={
-        'group_list':group_list
-    }
-    return render(request,"teacher_home.html",context)
+    if (teacher.objects.filter(user=request.user).exists()):
+        teacher_current = teacher.objects.filter(user=request.user).first()
+        group_list = group.objects.filter(owner=teacher_current)
+        context = {
+            'group_list': group_list
+        }
+        return render(request, "teacher_home.html", context)
+    else:
+        return HttpResponseRedirect(reverse("index"))
+
+
 
 @login_required
 def addassignment(request,pk):
@@ -211,7 +216,13 @@ def viewnotes(request,assignpk):
 def teacher_view_all(request,type,pk):
     if type=='assignment':
         assignment_view=student_assignment.objects.get(pk=pk)
+        # if(assignment_view.file.path.endswith('.docx')):
+        #     print('inside')
+        #     path=converter(assignment_view.file.path,"assignment",name="newfile.pdf")
+        # else:
+        #     path=None
         context={
+        # 'path':path,
         'type':'Assignment',
         'view':assignment_view
              }

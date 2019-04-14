@@ -1,17 +1,35 @@
 {% extends "teacher_home.html" %}
 {% block body %}
+<h1 class="text-center">Notes</h1>
 {% if notes_list %}
-<h1>Notes</h1>
+
  {% for notes in notes_list %}
  <div class="container">
-<div class="title">
-  {{notes.title}}
+   <div class="card ">
+
+
+<div class="card-title">
+  <div class="row justify-content-center align-items-center">
+  TITLE : {{notes.title}}
+  </div>
 </div>
 <div class="body">
-  {{notes.content}}
+  <div class="row justify-content-center align-items-center">
+  Content : {{notes.content}}
+  </div>
 </div>
-   <a href="{% url 'teacher:teacher_view_all' pk=notes.pk type='None' %}">View pdf </a>
+<div class="container-fluid">
+<a href="http://127.0.0.1:8000{{notes.file.url}}" class="btn btn-primary btn-block" download>Download</a>
+</div>
+<br>
+<div class="container-fluid">
+   <div class="row justify-content-center align-items-center">
+<embed src="http://127.0.0.1:8000{{notes.file.url}}" type="application/pdf"   height="700px" width="700px">
+    </div>
+    </div>
  </div>
  {% endfor%}
+ {%else %}
+ <h4>Nothing posted</h4>
 {% endif %}
 {% endblock %}

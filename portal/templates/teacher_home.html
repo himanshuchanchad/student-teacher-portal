@@ -40,6 +40,9 @@
 
     {% block body %}
     <h2>Welcome to teacher home</h2>
+    <div class="container-fluid">
+
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -57,14 +60,15 @@
       <th scope="row">{{forloop.counter}}</th>
       <td><a href="{%url 'teacher_group_detail' pk=group.pk  %}">{{group.name}}</a></td>
       <td>{{group.sub}}</td>
-      <td>{{group.divison}}</td>
-      <td>{{group.year}}</td>
+      <td>{{group.division}}</td>
+      <td>{{group.year}} {% if group.batch_check%} /{{group.batch}}{% endif %}</td>
       <td>{{group.dept}}</td>
     </tr>
     {%endfor %}
   </tbody>
 
 </table>
+    </div>
 {% endblock %}
   </body>
 </html>

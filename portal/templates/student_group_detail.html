@@ -1,11 +1,12 @@
 {% extends "student_home.html" %}
 {% block body %}
-
-
+<h1 class="text-center">Assignment</h1>
 {% if assignment %}
-<h1>Assignment</h1>
-<table class="table table-bordered">
-  <thead>
+<div class="container-fluid">
+
+
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -27,11 +28,15 @@
   </tbody>
 
 </table>
+</div>
+{%else %}
+<h2>Nothing to submit</h2>
 {% endif %}
+<h1 class="text-center">Practical</h1>
 {% if practical %}
-<h1>Practical</h1>
+<div class="container-fluid">
 <table class="table table-bordered">
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -53,16 +58,19 @@
   </tbody>
 
 </table>
+</div>
+{%else %}
+<h2>Nothing to submit</h2>
 {% endif %}
 {% if notes %}
-<h1>Notes</h1>
+<h1 class="text-center">Notes</h1>
+<div class="container-fluid">
 <table class="table table-bordered">
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
       <th scope="col">created</th>
-      <th scope="col">deadline</th>
 
     </tr>
   </thead>
@@ -70,14 +78,16 @@
     {%for temp in notes %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{temp.title}}</td>
+      <td> <a href="{% url 'teacher:viewnotes' assignpk=temp.pk %}">{{temp.title}} </a></td>
       <td>{{temp.created}}</td>
-      <td>{{temp.deadline}}</td>
 
     </tr>
     {%endfor %}
   </tbody>
 
 </table>
+</div>
+{%else %}
+<h2>Nothing recieved </h2>
 {% endif %}
 {% endblock %}

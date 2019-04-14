@@ -1,11 +1,13 @@
 {% extends "teacher_home.html" %}
 {% block body %}
-
-<a href="{% url 'teacher:addassignment' pk=group.pk %}" class="btn btn-outline-info" >Add assignment</a>
-<a href="{% url 'teacher:addpractical' pk=group.pk %}" class="btn btn-outline-info">Add practical</a>
-<a href="{% url 'teacher:addnotes' pk=group.pk %}" class="btn btn-outline-info">Add notes</a>
+ <div class="btn-group btn-group-justified btn-block">
+<a href="{% url 'teacher:addassignment' pk=group.pk %}" class="btn btn-outline-info  btn-lg  text-uppercase" >Add assignment</a>
+<a href="{% url 'teacher:addpractical' pk=group.pk %}" class="btn btn-outline-info  btn-lg  text-uppercase">Add practical</a>
+<a href="{% url 'teacher:addnotes' pk=group.pk %}" class="btn btn-outline-info  btn-lg  text-uppercase">Add notes</a>
+</div>
+<h1 class="text-center">Assignment</h1>
 {% if assignment %}
-<h1>Assignment</h1>
+<div class="container-fluid">
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -27,9 +29,15 @@
   </tbody>
 
 </table>
+
+</div>
+{%else%}
+<h2>Nothing assigned</h2>
 {% endif %}
+<h1 class="text-center">Practical</h1>
 {% if practical %}
-<h1>Practical</h1>
+
+<div class="container-fluid">
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -52,9 +60,15 @@
   </tbody>
 
 </table>
+
+</div>
+{%else%}
+<h2>Nothing assigned</h2>
 {% endif %}
+<h1 class="text-center">Notes</h1>
 {% if notes %}
-<h1>Notes</h1>
+<div class="container-fluid">
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -72,7 +86,9 @@
     </tr>
     {%endfor %}
   </tbody>
-
-</table>
+</table
+</div>
+{%else%}
+<h2>Nothing assigned</h2>
 {% endif %}
 {% endblock %}

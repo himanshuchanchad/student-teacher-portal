@@ -1,6 +1,6 @@
 {% extends "teacher_home.html" %}
 {% block body %}
 <h1> {{type}}</h1>
-<a href="http://127.0.0.1:8000{{view.file.url}}" class="btn btn-primary">Download</a>
-<embed src="http://127.0.0.1:8000{{view.file.url}}" type="application/pdf"   height="700px" width="700">
+<a href="http://127.0.0.1:8000{{view.file.url}}" class="btn btn-primary" download>Download</a>
+<embed src="http://127.0.0.1:8000{{view.file.url}}" type="application/pdf"   height="700px" width="700px">
 {% endblock %}

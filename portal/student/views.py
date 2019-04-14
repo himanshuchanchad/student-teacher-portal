@@ -8,12 +8,13 @@ from django.contrib.auth import logout,login,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from django.http import  HttpResponseRedirect,HttpResponse
+from django.http import  HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 from teachers.models import assignment,practical
 from home.models import students,group
 from .models import student_assignment,student_practical
+
 def studentsignup(request):
     if request.method=="POST":
         user=forms.add_user(data=request.POST)

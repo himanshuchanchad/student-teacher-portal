@@ -2,15 +2,16 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from . import forms
-from django.contrib.auth.models import User
-from django.contrib.auth import logout,login,authenticate
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from django.http import  HttpResponseRedirect,HttpResponse
+from django.http import  HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 from teachers.models import assignment,practical,notes
 from .models import group,teacher,students
+from student.models import student_assignment,student_practical
+
 def index(request):
     return render(request,"index.html")
 
@@ -77,17 +78,27 @@ def teacher_group_detail(request,pk):
 @login_required
 def student_group_detail(request,pk):
     group_detail=group.objects.get(pk=pk)
+    student=students.objects.get(user=request.user)
     try :
-        assignments=assignment.objects.filter(group=group_detail)
-        print(assignment)
+        submitted_assignment=student_assignment.objects.filter(student=student)
+        temp1=[]
+        for s in submitted_assignment:
+            temp1.append(s.assignment)
+        assignments=assignment.objects.filter(group=group_detail).exclude(title__in=temp1)
+
     except:
+        print("wrroeasdsacas")
         assignments = None
     try :
         note=notes.objects.filter(group=group_detail)
     except:
         note = None
     try :
-        practicals=practical.objects.filter(group=group_detail)
+        submitted_practical=student_practical.objects.filter(student=student)
+        temp2=[]
+        for s in submitted_practical:
+            temp2.append(s.practical)
+        practicals=practical.objects.filter(group=group_detail).exclude(title__in=temp2)
     except:
         practicals=None
     context={

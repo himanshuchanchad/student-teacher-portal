@@ -1,7 +1,8 @@
 {% extends "teacher_home.html" %}
 {% block body %}
-{% if assignment_list %}
 <h1>Assignment</h1>
+{% if assignment_list %}
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -24,5 +25,7 @@
     {%endfor %}
   </tbody>
 </table>
+{%else %}
+<h4>Nothing posted</h4>
 {% endif %}
 {% endblock %}

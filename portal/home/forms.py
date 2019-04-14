@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class add_user(forms.ModelForm):
     password= forms.CharField(widget=forms.PasswordInput)
     password2=forms.CharField(widget=forms.PasswordInput)
+    username=forms.CharField(max_length=20,required=True)
     class Meta:
         model=User
         fields=['first_name','last_name','username','email','password','password2']
