@@ -1,0 +1,39 @@
+{% extends "student_home.html" %}
+{% block body %}
+<h1 class="text-center">practical</h1>
+{% if practical_list %}
+
+ {% for practical in practical_list %}
+ <div class="container">
+   <div class="card ">
+
+
+<div class="card-title">
+  <div class="row justify-content-center align-items-center">
+  TITLE : {{practical.title}}
+  </div>
+</div>
+<div class="body">
+  <div class="row justify-content-center align-items-center">
+  Content : {{practical.content}}
+  </div>
+</div>
+<div class="container-fluid">
+<a href="http://127.0.0.1:8000{{practical.file.url}}" class="btn btn-primary btn-block" download>Download</a>
+</div>
+<br>
+<div class="container-fluid text-center">
+  {%  if 'pdf' in  practical.file.url %}
+  <embed src="http://127.0.0.1:8000{{practical.file.url}}" type="application/pdf"   height="700px" width="700px">
+{%  elif 'jpg'  in  practical.file.url %}
+<img src="http://127.0.0.1:8000{{practical.file.url}}" height="700px" width="700px">
+{% else %}
+<h2>Cannot load practical file as it is not supported in Browser</h2>
+{% endif %}
+</div>
+ </div>
+ {% endfor%}
+ {%else %}
+ <h4>Nothing posted</h4>
+{% endif %}
+{% endblock %}

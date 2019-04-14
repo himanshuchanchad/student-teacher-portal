@@ -1,0 +1,39 @@
+{% extends "student_home.html" %}
+{% block body %}
+<h1 class="text-center">assignment</h1>
+{% if assignment_list %}
+
+ {% for assignment in assignment_list %}
+ <div class="container">
+   <div class="card ">
+
+
+<div class="card-title">
+  <div class="row justify-content-center align-items-center">
+  TITLE : {{assignment.title}}
+  </div>
+</div>
+<div class="body">
+  <div class="row justify-content-center align-items-center">
+  Content : {{assignment.content}}
+  </div>
+</div>
+<div class="container-fluid">
+<a href="http://127.0.0.1:8000{{assignment.file.url}}" class="btn btn-primary btn-block" download>Download</a>
+</div>
+<br>
+<div class="container-fluid text-center">
+  {%  if 'pdf' in  assignment.file.url %}
+  <embed src="http://127.0.0.1:8000{{assignment.file.url}}" type="application/pdf"   height="700px" width="700px">
+{%  elif 'jpg'  in  assignment.file.url %}
+<img src="http://127.0.0.1:8000{{assignment.file.url}}" height="700px" width="700px">
+{% else %}
+<h2>Cannot  load assignment file as it is not supported in Browser</h2>
+{% endif %}
+</div>
+ </div>
+ {% endfor%}
+ {%else %}
+ <h4>Nothing posted</h4>
+{% endif %}
+{% endblock %}

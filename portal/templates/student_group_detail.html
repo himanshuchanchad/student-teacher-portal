@@ -19,7 +19,7 @@
     {%for temp in assignment %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{temp.title}}</td>
+      <td><a href="{% url 'student:viewassignment' assignpk=temp.pk %}">{{temp.title}}</a></td>
       <td>{{temp.created}}</td>
       <td>{{temp.deadline}}</td>
       <td><a href="{% url 'student:submitassignment' pk=group.pk assignpk=temp.pk  %}" class="btn btn-outline-info" >Submit assignment</a></td>
@@ -78,7 +78,7 @@
     {%for temp in notes %}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td> <a href="{% url 'teacher:viewnotes' assignpk=temp.pk %}">{{temp.title}} </a></td>
+      <td> <a href="{% url 'student:viewnotes' assignpk=temp.pk %}">{{temp.title}} </a></td>
       <td>{{temp.created}}</td>
 
     </tr>

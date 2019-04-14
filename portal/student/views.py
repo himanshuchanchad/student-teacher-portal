@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.http import  HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
-from teachers.models import assignment,practical
+from teachers.models import assignment,practical,notes
 from home.models import students,group
 from .models import student_assignment,student_practical
 
@@ -142,3 +142,36 @@ def joingroups(request,pk):
     else:
         pass
     return render(request,"joingroups.html")
+
+@login_required
+def viewassignment(request,assignpk):
+    try :
+        assignment_list=assignment.objects.filter(pk=assignpk)
+    except :
+        assignment_list=None
+    context={
+        'assignment_list':assignment_list
+    }
+    return render(request,"student_view_assignment.html",context)
+
+@login_required
+def viewpractical(request,assignpk):
+    try :
+        practical_list=practical.objects.filter(pk=assignpk)
+    except :
+        practical_list=None
+    context={
+        'practical_list':practical_list
+    }
+    return render(request,"student_view_practical.html",context)
+
+@login_required
+def viewnotes(request,assignpk):
+    try :
+        notes_list=notes.objects.filter(pk=assignpk)
+    except :
+        notes_list=None
+    context={
+        'notes_list':notes_list
+    }
+    return render(request,"student_view_notes.html",context)

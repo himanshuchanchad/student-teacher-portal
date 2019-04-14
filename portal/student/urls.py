@@ -7,5 +7,8 @@ urlpatterns=[
     path('student_home/', views.student_home,name='student_home'),
     path('submitassignment/<int:pk>/<int:assignpk>' ,views.submitassignment,name='submitassignment'),
     path('submitpractical/<int:pk>/<int:assignpk>' ,views.submitpractical,name='submitpractical'),
-    path('joingroups/<int:pk>/',views.joingroups,name='joingroups')
+    path('joingroups/<int:pk>/',views.joingroups,name='joingroups'),
+    path('viewassignment/<int:assignpk>/',views.viewassignment,name="viewassignment"),
+    path('viewpractical/<int:assignpk>/',views.viewpractical,name="viewpractical"),
+    path('viewnotes/<int:assignpk>/',views.viewnotes,name="viewnotes"),
 ]
